@@ -24,6 +24,8 @@ kind([1, 2, 3]);  // "array"
 kind(new Date()); // "date"
 kind(document.getElementById('id'));        // "element"
 kind(document.getElementsByTagName('div')); // "nodelist"
+
+// This one's actually just an object
 kind({});         // "object"
 
 // Also works on standard types
@@ -57,7 +59,8 @@ kind(alert);      // "function"
     + IE 6+ (and maybe older)
     + Chrome
     + Firefox
-    + Android 1+
     + Safari
+    + Android 1+
     + Opera
     + Netscape 4 (in theory!)
+    + Probably anything that runs JavaScript
