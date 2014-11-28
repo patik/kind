@@ -11,7 +11,7 @@ Examples:
 | `[1, 2, 3]` | `"object"` | `"array"` |
 | `null` | `"object"` | `"null"` |
 | `document.getElementById('id')` | `"object"` | `"element"` |
-| `document.getElementsByTagName('div')` | `"object"` | `"node"` |
+| `document.getElementsByTagName('div')` | `"object"` | `"nodelist"` |
 | `new Date()` | `"object"` | `"date"` |
 | `{}` | `"object"` | `"object"` (if no special type was detected &mdash; see full list below) |
 
