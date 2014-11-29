@@ -6,7 +6,7 @@
 
 Examples:
 
-| Input | `typeof` | **`kind()`** |
+| Input | *typeof* | *kind* |
 |:---------------|:--------|:------------|
 | `[1, 2, 3]` | `"object"` | `"array"` |
 | `null` | `"object"` | `"null"` |
