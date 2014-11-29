@@ -1,6 +1,6 @@
 /** @description Precise type-checker for JavaScript
- * @version 1.0.0
- * @date 2014-11-27
+ * @version 1.0.1
+ * @date 2014-11-29
  * @copyright 2014
  * https://github.com/patik/kind
  */
@@ -8,8 +8,8 @@
 /**
  * Determine a variable's precise type
  * Objects are clarified if they're a common type (array, element, null, etc)
- * @param   {Any}     o  Some variable to test
- * @return  {String}     Lowercase name for the variable's type
+ * @param   {Any}     thing  Some variable to test
+ * @return  {String}         Lowercase name for the variable's type
  */
 window.kind = function _kind(thing) {
     var objectType, specialTypes, i;
@@ -70,6 +70,11 @@ window.kind = function _kind(thing) {
             typeof thing.item !== 'undefined' &&
             (thing.length === 0 || (typeof thing[0] === 'object' && thing[0].nodeType > 0))) {
             return 'nodelist';
+        }
+
+        // Array-like object
+        if (typeof thing.length === 'number') {
+            return 'arraylike';
         }
 
         // Some other type of object

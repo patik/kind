@@ -6,12 +6,13 @@
 
 Examples:
 
-| Input | Native `typeof` | **Kind** |
+| Input | `typeof` | **`kind()`** |
 |:---------------|:--------|:------------|
 | `[1, 2, 3]` | `"object"` | `"array"` |
 | `null` | `"object"` | `"null"` |
 | `document.getElementById('id')` | `"object"` | `"element"` |
 | `document.getElementsByTagName('div')` | `"object"` | `"nodelist"` |
+| `document.createTextNode('')` | `"object"` | `"node"` |
 | `new Date()` | `"object"` | `"date"` |
 | `{}` | `"object"` | `"object"` (if no special type was detected &mdash; see full list below) |
 
@@ -21,6 +22,7 @@ Examples:
 // Objects that aren't *really* objects
 kind(null);       // "null"
 kind([1, 2, 3]);  // "array"
+kind(arguments);  // "arraylike"
 kind(new Date()); // "date"
 kind(document.getElementById('id'));        // "element"
 kind(document.getElementsByTagName('div')); // "nodelist"
@@ -39,8 +41,10 @@ kind(alert);      // "function"
 - All standard types normally returned by `typeof`
     + function, undefined, string, boolean, number
 - array
+- arraylike
 - null
 - element
+- node
 - nodelist
 - event
 - regexp
