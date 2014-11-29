@@ -46,7 +46,7 @@ module.exports = function(grunt) {
     });
 
     // Default task (JS only)
-    grunt.registerTask('default', ['jshint', 'uglify']);
+    grunt.registerTask('default', ['jshint', 'uglify', 'qunit']);
 
     // Development
     grunt.registerTask('dev', ['default', 'watch']);
