@@ -36,6 +36,12 @@ module.exports = function(grunt) {
                     spawn: false,
                 }
             }
+        },
+        qunit: {
+            options: {
+                inject: 'test/unit/phantom.js'
+            },
+            files: 'test/index.html'
         }
     });
 
@@ -44,4 +50,7 @@ module.exports = function(grunt) {
 
     // Development
     grunt.registerTask('dev', ['default', 'watch']);
+
+    // Testing
+    grunt.registerTask('test', ['qunit']);
 };
