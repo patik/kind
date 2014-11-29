@@ -18,6 +18,8 @@ Examples:
 
 ## Usage
 
+### Basic
+
 ```js
 // Objects that aren't *really* objects
 kind(null);       // "null"
@@ -36,17 +38,41 @@ kind(2);          // "number"
 kind(alert);      // "function"
 ```
 
+### "Deep" option
+
+You may add a second, boolean parameter to tell `kind` to perform a deeper test for some types. For example, instead of "number" it could return "integer" or "float".
+
+```js
+kind(1);          // "number"
+kind(1, true);    // "integer"
+
+kind(1.21);       // "number"
+kind(1.21, true); // "float"
+
+kind(evt);        // "event"
+kind(evt, true);  // "mouseevent" (i.e. if the event was a click)
+```
+
+A complete list is noted below
+
 ## Supported types
 
 - All standard types normally returned by `typeof`
-    + function, undefined, string, boolean, number
-- array
-- arraylike
-- null
-- element
-- node
-- nodelist
-- event
+    + `function`, `undefined`, `boolean`
+    + `string`
+        * Deep option returns either `string` or `emptystring`
+    + `number`
+        * Deep option returns either `integer` or `float`
+- `array`
+- `arraylike`
+    + A non-array object with a `.length` property
+- `null`
+- `element`
+- `node`
+    + Deep options from [this list](https://developer.mozilla.org/en-US/docs/Web/API/Node.nodeType) (e.g. `text`, `comment`)
+- `nodelist`
+- `event`
+    + Deep options from [this list](https://developer.mozilla.org/en-US/docs/Web/Events) (e.g. `mouseevent`, `keyboardevent`)
 - regexp
 - date
 - error
@@ -67,4 +93,4 @@ kind(alert);      // "function"
     + Android 1+
     + Opera
     + Netscape 4 (in theory!)
-    + Probably anything that runs JavaScript
+    + Probably anything that runs JavaScript and supports regular expressions
