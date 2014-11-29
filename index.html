@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Kind.js, the Precise Type-Checker for JavaScript</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="author" content="Craig Patik">
+    <meta name="keywords" content="typeof, type, javascript, check, valid, object, array">
+    <link rel="canonical" href="http://patik.github.io/kind">
+    <link href="docs/github-markdown.css" rel="stylesheet">
+    <style>
+        body {
+            color: #444;
+        }
+
+        header,
+        .markdown-body {
+            max-width: 980px;
+            margin: 1em auto;
+        }
+
+        header h1 a,
+        header h2 a {
+            color: #444;
+            text-decoration: none;
+        }
+
+        .markdown-body h1 {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1><a href="https://github.com/patik/kind">Kind.js</a></h1>
+        <h2><a href="https://github.com/patik/kind">The precise type-checker for JavaScript</a></h2>
+        <p><a href="https://github.com/patik/kind">Get it on GitHub</a></p>
+    </header>
+    <div class="markdown-body">
+        <h1 id="kind">Kind</h1>
+<p><strong>A more precise version of JavaScript&#39;s <code>typeof</code></strong></p>
+<p><code>kind()</code> returns a <em>useful</em> name for a variable&#39;s type. It breaks down objects into more precise terms: array, null, element, etc.</p>
+<p>Examples:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Input</th>
+<th style="text-align:left"><em>typeof</em></th>
+<th style="text-align:left"><em>kind</em></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><code>[1, 2, 3]</code></td>
+<td style="text-align:left"><code>&quot;object&quot;</code></td>
+<td style="text-align:left"><code>&quot;array&quot;</code></td>
+</tr>
+<tr>
+<td style="text-align:left"><code>null</code></td>
+<td style="text-align:left"><code>&quot;object&quot;</code></td>
+<td style="text-align:left"><code>&quot;null&quot;</code></td>
+</tr>
+<tr>
+<td style="text-align:left"><code>document.getElementById(&#39;id&#39;)</code></td>
+<td style="text-align:left"><code>&quot;object&quot;</code></td>
+<td style="text-align:left"><code>&quot;element&quot;</code></td>
+</tr>
+<tr>
+<td style="text-align:left"><code>document.getElementsByTagName(&#39;div&#39;)</code></td>
+<td style="text-align:left"><code>&quot;object&quot;</code></td>
+<td style="text-align:left"><code>&quot;nodelist&quot;</code></td>
+</tr>
+<tr>
+<td style="text-align:left"><code>document.createTextNode(&#39;&#39;)</code></td>
+<td style="text-align:left"><code>&quot;object&quot;</code></td>
+<td style="text-align:left"><code>&quot;node&quot;</code></td>
+</tr>
+<tr>
+<td style="text-align:left"><code>new Date()</code></td>
+<td style="text-align:left"><code>&quot;object&quot;</code></td>
+<td style="text-align:left"><code>&quot;date&quot;</code></td>
+</tr>
+<tr>
+<td style="text-align:left"><code>{}</code></td>
+<td style="text-align:left"><code>&quot;object&quot;</code></td>
+<td style="text-align:left"><code>&quot;object&quot;</code> (if no special type was detected &mdash; see full list below)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="usage">Usage</h2>
+<h3 id="basic">Basic</h3>
+<pre><code class="lang-js"><span class="comment">// Objects that aren't *really* objects</span>
+kind(<span class="keyword">null</span>);       <span class="comment">// "null"</span>
+kind([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]);  <span class="comment">// "array"</span>
+kind(arguments);  <span class="comment">// "arraylike"</span>
+kind(<span class="keyword">new</span> Date()); <span class="comment">// "date"</span>
+kind(document.getElementById(<span class="string">'id'</span>));        <span class="comment">// "element"</span>
+kind(document.getElementsByTagName(<span class="string">'div'</span>)); <span class="comment">// "nodelist"</span>
+
+<span class="comment">// This one's actually just an object</span>
+kind({});         <span class="comment">// "object"</span>
+
+<span class="comment">// Also works on standard types</span>
+kind(<span class="string">"text"</span>);     <span class="comment">// "string"</span>
+kind(<span class="number">2</span>);          <span class="comment">// "number"</span>
+kind(alert);      <span class="comment">// "function"</span></code></pre>
+<h3 id="-deep-option">&quot;Deep&quot; option</h3>
+<p>You may add a second, boolean parameter to tell <code>kind</code> to perform a deeper test for some types. For example, instead of &quot;number&quot; it could return &quot;integer&quot; or &quot;float&quot;.</p>
+<pre><code class="lang-js">kind(<span class="number">1</span>);          <span class="regexp">//</span> <span class="string">"number"</span>
+kind(<span class="number">1</span>, <span class="keyword">true</span>);    <span class="regexp">//</span> <span class="string">"integer"</span>
+
+kind(<span class="number">1.21</span>);       <span class="regexp">//</span> <span class="string">"number"</span>
+kind(<span class="number">1.21</span>, <span class="keyword">true</span>); <span class="regexp">//</span> <span class="string">"float"</span>
+
+kind(evt);        <span class="regexp">//</span> <span class="string">"event"</span>
+kind(evt, <span class="keyword">true</span>);  <span class="regexp">//</span> <span class="string">"mouseevent"</span> (i.e. <span class="keyword">if</span> the event was a click)</code></pre>
+<p>A complete list is noted below</p>
+<h2 id="supported-types">Supported types</h2>
+<ul>
+<li>All standard types normally returned by <code>typeof</code><ul>
+<li><code>function</code>, <code>undefined</code>, <code>boolean</code></li>
+<li><code>string</code><ul>
+<li>Deep option returns either <code>string</code> or <code>emptystring</code></li>
+</ul>
+</li>
+<li><code>number</code><ul>
+<li>Deep option returns either <code>integer</code> or <code>float</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>array</code></li>
+<li><code>arraylike</code><ul>
+<li>A non-array object with a <code>.length</code> property</li>
+</ul>
+</li>
+<li><code>null</code></li>
+<li><code>element</code></li>
+<li><code>node</code><ul>
+<li>Deep options from <a href="https://developer.mozilla.org/en-US/docs/Web/API/Node.nodeType">this list</a> (e.g. <code>text</code>, <code>comment</code>)</li>
+</ul>
+</li>
+<li><code>nodelist</code></li>
+<li><code>event</code><ul>
+<li>Deep options from <a href="https://developer.mozilla.org/en-US/docs/Web/Events">this list</a> (e.g. <code>mouseevent</code>, <code>keyboardevent</code>)</li>
+</ul>
+</li>
+<li>regexp</li>
+<li>date</li>
+<li>error</li>
+<li>errorevent</li>
+<li>math</li>
+</ul>
+<h2 id="features">Features</h2>
+<ul>
+<li>Works with any type, not just objects</li>
+<li>Always returns a simple lowercase string, just like the native <code>typeof</code></li>
+<li>Handles undefined or undeclared variables</li>
+<li>Optimized to check for the most common types first</li>
+<li>Excellent browser support<ul>
+<li>IE 6+ (and maybe older)</li>
+<li>Chrome</li>
+<li>Firefox</li>
+<li>Safari</li>
+<li>Android 1+</li>
+<li>Opera</li>
+<li>Netscape 4 (in theory!)</li>
+<li>Probably anything that runs JavaScript and supports regular expressions</li>
+</ul>
+</li>
+</ul>
+
+    </div>
+</body>
+</html>
