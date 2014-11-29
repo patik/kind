@@ -1,5 +1,5 @@
 /** @description Precise type-checker for JavaScript
- * @version 1.0.1
+ * @version 1.0.2
  * @date 2014-11-29
  * @copyright 2014
  * https://github.com/patik/kind
@@ -8,25 +8,62 @@
 /**
  * Determine a variable's precise type
  * Objects are clarified if they're a common type (array, element, null, etc)
- * @param   {Any}     thing  Some variable to test
- * @return  {String}         Lowercase name for the variable's type
+ * @param   {Mixed}    thing  Some variable to test
+ * @param   {Boolean}  deep   Whether to dive deeper into some types to return a more specific type
+ * @return  {String}          Lowercase name for the variable's type
  */
-window.kind = function _kind(thing) {
-    var objectType, specialTypes, i;
+window.kind = function _kind(thing, deep) {
+    var objectType, specialTypes, nodeTypes, i;
 
-    // Basic, non-object types:
+    /////////////////////////////
+    // Basic, non-object types //
+    /////////////////////////////
 
     // Null
     if (thing === null) {
         return 'null';
     }
 
-    // Other standard types
-    if (/function|undefined|string|boolean|number/.test(typeof thing)) {
+    // Standard types except string and number
+    if (/^function$|^undefined$|^boolean$/.test(typeof thing)) {
         return typeof thing;
     }
 
-    // Objects:
+    // String and number can be deep-searched
+    if (/^string$|^number$/.test(typeof thing)) {
+        if (deep) {
+            // Strings
+            if (typeof thing === 'string') {
+                if (!thing.length) {
+                    return 'emptystring';
+                }
+                else {
+                    return 'string';
+                }
+            }
+
+            // Numbers
+            if (typeof thing === 'number') {
+                // Integer
+                if (parseInt(thing, 10) === thing) {
+                    return 'integer';
+                }
+
+                // Float
+                if (parseFloat(thing) === thing) {
+                    return 'float';
+                }
+            }
+        }
+        else {
+            return typeof thing;
+        }
+    }
+
+    /////////////
+    // Objects //
+    /////////////
+
     if (typeof thing === 'object') {
         objectType = Object.prototype.toString.call(thing);
 
@@ -37,6 +74,16 @@ window.kind = function _kind(thing) {
         while (i--) {
             if (objectType === '[object ' + specialTypes[i] + ']') {
                 return specialTypes[i].toLowerCase();
+            }
+        }
+
+        // Events
+        if (/\[object\s(\w+Event)\]/.test(objectType)) {
+            if (deep) {
+                return /\[object\s(\w+Event)\]/.exec(objectType)[1].toLowerCase();
+            }
+            else {
+                return 'event';
             }
         }
 
@@ -53,14 +100,36 @@ window.kind = function _kind(thing) {
         }
 
         // DOM node:
+        nodeTypes = {
+            '1': 'element',
+            '2': 'attribute',
+            '3': 'text',
+            '4': 'cdata',
+            '5': 'entityreference',
+            '6': 'entity',
+            '7': 'processinginstruction',
+            '8': 'comment',
+            '9': 'document',
+            '10': 'documenttype',
+            '11': 'documentfragment',
+            '12': 'notation'
+        };
 
         // DOM Level 2
         if (typeof Node === 'object' && thing instanceof Node) {
+            if (deep && thing.nodeType.toString() in nodeTypes) {
+                return nodeTypes[thing.nodeType];
+            }
+
             return 'node';
         }
 
         // DOM Level 1
         if (typeof thing.nodeType === 'number' && typeof thing.nodeName === 'string') {
+            if (deep && thing.nodeType.toString() in nodeTypes) {
+                return nodeTypes[thing.nodeType];
+            }
+
             return 'node';
         }
 
@@ -73,11 +142,11 @@ window.kind = function _kind(thing) {
         }
 
         // Array-like object
-        if (typeof thing.length === 'number') {
+        if (typeof thing.length === 'number' && thing !== window) {
             return 'arraylike';
         }
 
-        // Some other type of object
+        // Some other type of object, possible a plain object
         return 'object';
     }
 
