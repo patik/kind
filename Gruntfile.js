@@ -35,6 +35,13 @@ module.exports = function(grunt) {
                 options: {
                     spawn: false,
                 }
+            },
+            docs: {
+                files: ['README.md'],
+                tasks: ['markdown'],
+                options: {
+                    spawn: false,
+                }
             }
         },
         qunit: {
@@ -53,23 +60,7 @@ module.exports = function(grunt) {
                 markdownOptions: {
                     highlight: 'auto',
                     gfm: true,
-                },
-                // Add a CSS file to the pages
-                // postCompile: function(html, context) {
-                //     var x = '', i;
-
-                //     for (i in context) {
-                //         // if (context.hasOwnProperty(i)) {
-                //             x += context[i] + '\n';
-                //         // }
-                //     }
-
-                //     return html.replace('<title>doc</title>', '<title>Kind, the precise type-checker for JavaScript</title>\n' +
-                //                 '<meta name="viewport" content="width=device-width,initial-scale=1">' +
-                //                 '<meta name="author" content="Craig Patik">' +
-                //                 '<link rel="canonical" href="http://patik.github.io/kind">'
-                //                 ) + '<link href="docs/github-markdown.css" rel="stylesheet"><div>' + x + '</div>';
-                // },
+                }
             },
             prod: {
                 files: [{
@@ -78,10 +69,8 @@ module.exports = function(grunt) {
                     dest: '',
                     ext: '.html',
 
-                    // This plugin has a bug making it impossible to put the files where we want them, so we rename the path that Grunt generates to move the file
-                    // See: https://github.com/treasonx/grunt-markdown/issues/43
+                    // Rename "readme" to "index"
                     rename: function (dest, src) {
-                        // Rename the readme
                         return src.replace('README', 'index');
                     },
                 }]
@@ -97,4 +86,7 @@ module.exports = function(grunt) {
 
     // Testing
     grunt.registerTask('test', ['qunit']);
+
+    // Documentation
+    grunt.registerTask('docs', ['markdown', 'watch']);
 };
