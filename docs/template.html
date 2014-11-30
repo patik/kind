@@ -19,10 +19,27 @@
             margin: 1em auto;
         }
 
-        header h1 a,
-        header h2 a {
+        header a {
             color: #444;
             text-decoration: none;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 0.5em 1em;
+            color: #563d7c;
+            border: 1px solid hsla(264, 34%, 36%, 0.5); /*same as #563d7c;*/
+            border-radius: 4px;
+            font-size: 22px;
+            text-align: center;
+            transition: all 100ms ease-in;
+            background-color: hsla(264, 34%, 72%, 0.15);
+        }
+
+        .button:hover {
+            background-color: #563d7c;
+            color: white;
+            border-color: white;
         }
 
         .markdown-body h1 {
@@ -34,7 +51,7 @@
     <header>
         <h1><a href="https://github.com/patik/kind/">Kind.js</a></h1>
         <h2><a href="https://github.com/patik/kind/">The precise type-checker for JavaScript</a></h2>
-        <p><a href="https://github.com/patik/kind/">Get it on GitHub</a></p>
+        <p><a class="button" role="button" href="https://github.com/patik/kind/">Get it on GitHub</a></p>
     </header>
     <div class="markdown-body">
         <%=content%>

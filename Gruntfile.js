@@ -37,7 +37,7 @@ module.exports = function(grunt) {
                 }
             },
             docs: {
-                files: ['README.md'],
+                files: ['README.md', 'docs/template.html'],
                 tasks: ['markdown'],
                 options: {
                     spawn: false,

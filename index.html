@@ -19,10 +19,27 @@
             margin: 1em auto;
         }
 
-        header h1 a,
-        header h2 a {
+        header a {
             color: #444;
             text-decoration: none;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 0.5em 1em;
+            color: #563d7c;
+            border: 1px solid hsla(264, 34%, 36%, 0.5); /*same as #563d7c;*/
+            border-radius: 4px;
+            font-size: 22px;
+            text-align: center;
+            transition: all 100ms ease-in;
+            background-color: hsla(264, 34%, 72%, 0.15);
+        }
+
+        .button:hover {
+            background-color: #563d7c;
+            color: white;
+            border-color: white;
         }
 
         .markdown-body h1 {
@@ -34,7 +51,7 @@
     <header>
         <h1><a href="https://github.com/patik/kind/">Kind.js</a></h1>
         <h2><a href="https://github.com/patik/kind/">The precise type-checker for JavaScript</a></h2>
-        <p><a href="https://github.com/patik/kind/">Get it on GitHub</a></p>
+        <p><a class="button" role="button" href="https://github.com/patik/kind/">Get it on GitHub</a></p>
     </header>
     <div class="markdown-body">
         <h1 id="kind">Kind</h1>
@@ -117,7 +134,7 @@ kind(evt, <span class="keyword">true</span>);  <span class="regexp">//</span> <s
 <p>A complete list is noted below</p>
 <h2 id="supported-types">Supported types</h2>
 <ul>
-<li>All standard types normally returned by <code>typeof</code><ul>
+<li>All standard types normally returned by <code>typeof</code>:<ul>
 <li><code>function</code>, <code>undefined</code>, <code>boolean</code></li>
 <li><code>string</code><ul>
 <li>Deep option returns either <code>string</code> or <code>emptystring</code></li>
@@ -145,11 +162,11 @@ kind(evt, <span class="keyword">true</span>);  <span class="regexp">//</span> <s
 <li>Deep options from <a href="https://developer.mozilla.org/en-US/docs/Web/Events">this list</a> (e.g. <code>mouseevent</code>, <code>keyboardevent</code>)</li>
 </ul>
 </li>
-<li>regexp</li>
-<li>date</li>
-<li>error</li>
-<li>errorevent</li>
-<li>math</li>
+<li><code>regexp</code></li>
+<li><code>date</code></li>
+<li><code>error</code></li>
+<li><code>errorevent</code></li>
+<li><code>math</code></li>
 </ul>
 <h2 id="features">Features</h2>
 <ul>
