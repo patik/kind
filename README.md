@@ -57,7 +57,7 @@ A complete list is noted below
 
 ## Supported types
 
-- All standard types normally returned by `typeof`
+- All standard types normally returned by `typeof`:
     + `function`, `undefined`, `boolean`
     + `string`
         * Deep option returns either `string` or `emptystring`
@@ -73,11 +73,11 @@ A complete list is noted below
 - `nodelist`
 - `event`
     + Deep options from [this list](https://developer.mozilla.org/en-US/docs/Web/Events) (e.g. `mouseevent`, `keyboardevent`)
-- regexp
-- date
-- error
-- errorevent
-- math
+- `regexp`
+- `date`
+- `error`
+- `errorevent`
+- `math`
 
 ## Features
 
