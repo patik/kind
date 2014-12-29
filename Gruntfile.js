@@ -51,8 +51,6 @@ module.exports = function(grunt) {
             files: 'test/index.html'
         },
 
-        // Compile markdown files into HTML (e.g. for documentation)
-        // https://github.com/treasonx/grunt-markdown
         markdown: {
             options: {
                 highlight: 'auto',
