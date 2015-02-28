@@ -6,11 +6,12 @@
     "author": "Craig Patik <craig@patik.com> (http://patik.com)",
     "devDependencies": {
         "grunt": "^0.4.5",
-        "grunt-contrib-jshint": "^0.10.0",
-        "grunt-contrib-uglify": "^0.6.0",
+        "grunt-contrib-jshint": "^0.11.0",
+        "grunt-contrib-qunit": "^0.5.2",
+        "grunt-contrib-uglify": "^0.8.0",
         "grunt-contrib-watch": "^0.6.1",
-        "load-grunt-tasks": "^1.0.0",
-        "grunt-contrib-qunit": "^0.5.2"
+        "grunt-markdown": "^0.7.0",
+        "load-grunt-tasks": "^3.1.0"
     },
     "keywords": [
         "typeof",
@@ -30,13 +31,9 @@
     "homepage": "https://github.com/patik/kind",
     "directories": {},
     "dependencies": {
-        "grunt": "^0.4.5",
-        "grunt-contrib-jshint": "^0.10.0",
-        "grunt-contrib-uglify": "^0.6.0",
-        "grunt-contrib-watch": "^0.6.1",
-        "load-grunt-tasks": "^1.0.0"
+        "grunt": "^0.4.5"
     },
     "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1"
+        "test": "test/unit/kind.js"
     }
 }
