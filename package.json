@@ -1,7 +1,7 @@
 {
     "name": "kind",
     "description": "Precise type-checker for JavaScript",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "main": "kind",
     "author": "Craig Patik <craig@patik.com> (http://patik.com)",
     "devDependencies": {

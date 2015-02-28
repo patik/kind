@@ -1,0 +1,5 @@
+node_modules
+.gitattributes
+.jshintrc
+test
+bower.json
