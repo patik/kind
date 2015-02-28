@@ -1,5 +1,5 @@
 {
-    "name": "kind",
+    "name": "kindjs",
     "description": "Precise type-checker for JavaScript",
     "version": "1.0.3",
     "main": "kind",
@@ -29,7 +29,9 @@
         "url": "https://github.com/patik/kind/issues"
     },
     "homepage": "https://github.com/patik/kind",
-    "directories": {},
+    "directories": {
+        "test": "test"
+    },
     "dependencies": {
         "grunt": "^0.4.5"
     },
