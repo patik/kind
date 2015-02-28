@@ -16,7 +16,17 @@ Examples:
 | `new Date()` | `"object"` | `"date"` |
 | `{}` | `"object"` | `"object"` (if no special type was detected &mdash; see full list below) |
 
+## Installation
+
+**npm**: `npm install kindjs`
+
+**Bower**: `bower install kind`
+
+Or just download [kind.js](https://github.com/patik/kind/blob/master/kind.js) and reference it in your page with a `<script>` tag.
+
 ## Usage
+
+Available as a CommonJS module (e.g with RequireJS) or as a global method, `kind()`.
 
 ### Basic
 

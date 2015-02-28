@@ -9,10 +9,6 @@
     <link rel="canonical" href="http://patik.github.io/kind/">
     <link href="docs/github-markdown.css" rel="stylesheet">
     <style>
-        * {
-            box-sizing: border-box;
-        }
-
         body {
             color: #444;
         }
@@ -108,33 +104,40 @@
 </tr>
 </tbody>
 </table>
+<h2 id="installation">Installation</h2>
+<p><strong>npm</strong>: <code>npm install kindjs</code></p>
+<p><strong>Bower</strong>: <code>bower install kind</code></p>
+<p>Or just download <a href="https://github.com/patik/kind/blob/master/kind.js">kind.js</a> and reference it in your page with a <code>&lt;script&gt;</code> tag.</p>
 <h2 id="usage">Usage</h2>
+<p>Available as a CommonJS module (e.g with RequireJS) or as a global method, <code>kind()</code>.</p>
 <h3 id="basic">Basic</h3>
-<pre><code class="lang-js"><span class="comment">// Objects that aren't *really* objects</span>
-kind(<span class="keyword">null</span>);       <span class="comment">// "null"</span>
-kind([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]);  <span class="comment">// "array"</span>
-kind(arguments);  <span class="comment">// "arraylike"</span>
-kind(<span class="keyword">new</span> Date()); <span class="comment">// "date"</span>
-kind(document.getElementById(<span class="string">'id'</span>));        <span class="comment">// "element"</span>
-kind(document.getElementsByTagName(<span class="string">'div'</span>)); <span class="comment">// "nodelist"</span>
+<pre><code class="lang-js"><span class="hljs-comment">// Objects that aren't *really* objects</span>
+kind(<span class="hljs-literal">null</span>);       <span class="hljs-comment">// "null"</span>
+kind([<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>]);  <span class="hljs-comment">// "array"</span>
+kind(<span class="hljs-built_in">arguments</span>);  <span class="hljs-comment">// "arraylike"</span>
+kind(<span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>()); <span class="hljs-comment">// "date"</span>
+kind(<span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">'id'</span>));        <span class="hljs-comment">// "element"</span>
+kind(<span class="hljs-built_in">document</span>.getElementsByTagName(<span class="hljs-string">'div'</span>)); <span class="hljs-comment">// "nodelist"</span>
 
-<span class="comment">// This one's actually just an object</span>
-kind({});         <span class="comment">// "object"</span>
+<span class="hljs-comment">// This one's actually just an object</span>
+kind({});         <span class="hljs-comment">// "object"</span>
 
-<span class="comment">// Also works on standard types</span>
-kind(<span class="string">"text"</span>);     <span class="comment">// "string"</span>
-kind(<span class="number">2</span>);          <span class="comment">// "number"</span>
-kind(alert);      <span class="comment">// "function"</span></code></pre>
+<span class="hljs-comment">// Also works on standard types</span>
+kind(<span class="hljs-string">"text"</span>);     <span class="hljs-comment">// "string"</span>
+kind(<span class="hljs-number">2</span>);          <span class="hljs-comment">// "number"</span>
+kind(alert);      <span class="hljs-comment">// "function"</span>
+</code></pre>
 <h3 id="-deep-option">&quot;Deep&quot; option</h3>
 <p>You may add a second, boolean parameter to tell <code>kind</code> to perform a deeper test for some types. For example, instead of &quot;number&quot; it could return &quot;integer&quot; or &quot;float&quot;.</p>
-<pre><code class="lang-js">kind(<span class="number">1</span>);          <span class="regexp">//</span> <span class="string">"number"</span>
-kind(<span class="number">1</span>, <span class="keyword">true</span>);    <span class="regexp">//</span> <span class="string">"integer"</span>
+<pre><code class="lang-js">kind(<span class="hljs-number">1</span>);          <span class="hljs-regexp">//</span> <span class="hljs-string">"number"</span>
+kind(<span class="hljs-number">1</span>, <span class="hljs-keyword">true</span>);    <span class="hljs-regexp">//</span> <span class="hljs-string">"integer"</span>
 
-kind(<span class="number">1.21</span>);       <span class="regexp">//</span> <span class="string">"number"</span>
-kind(<span class="number">1.21</span>, <span class="keyword">true</span>); <span class="regexp">//</span> <span class="string">"float"</span>
+kind(<span class="hljs-number">1.21</span>);       <span class="hljs-regexp">//</span> <span class="hljs-string">"number"</span>
+kind(<span class="hljs-number">1.21</span>, <span class="hljs-keyword">true</span>); <span class="hljs-regexp">//</span> <span class="hljs-string">"float"</span>
 
-kind(evt);        <span class="regexp">//</span> <span class="string">"event"</span>
-kind(evt, <span class="keyword">true</span>);  <span class="regexp">//</span> <span class="string">"mouseevent"</span> (i.e. <span class="keyword">if</span> the event was a click)</code></pre>
+kind(evt);        <span class="hljs-regexp">//</span> <span class="hljs-string">"event"</span>
+kind(evt, <span class="hljs-keyword">true</span>);  <span class="hljs-regexp">//</span> <span class="hljs-string">"mouseevent"</span> (i.e. <span class="hljs-keyword">if</span> the event was a click)
+</code></pre>
 <p>A complete list is noted below</p>
 <h2 id="supported-types">Supported types</h2>
 <ul>
