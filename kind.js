@@ -1,14 +1,14 @@
 /** @description Precise type-checker for JavaScript
- * @version 1.0.3
- * @date 2015-02-28
- * @copyright 2014
- * https://github.com/patik/kind
+ * @version 1.0.4
+ * @date 2015-03-20
+ * @copyright 2015
+ * @see https://github.com/patik/kind
  */
 
 /*global define: true */
 (function (name, definition) {
-    if (typeof define === "function" && define.amd) {
-        define(definition);
+    if (typeof define === 'function' && define.amd) {
+        define([], definition);
     }
     // Fall back to a global variable
     else {

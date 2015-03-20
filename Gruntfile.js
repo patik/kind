@@ -10,12 +10,12 @@ module.exports = function(grunt) {
                     ' * @version <%= pkg.version %>\n' +
                     ' * @date <%= grunt.template.today("yyyy-mm-dd") %>\n' +
                     ' * @copyright <%= grunt.template.today("yyyy") %> <%= pkg.author.name %>\n' +
-                    ' * <%= pkg.homepage %>\n' +
+                    ' * @see <%= pkg.homepage %>\n' +
                     ' */\n'
             },
             build: {
-                src: '<%= pkg.name %>.js',
-                dest: '<%= pkg.name %>.min.js'
+                src: '<%= pkg.main %>.js',
+                dest: '<%= pkg.main %>.min.js'
             }
         },
         jshint: {
@@ -49,7 +49,7 @@ module.exports = function(grunt) {
     grunt.registerTask('default', ['jshint', 'uglify', 'qunit']);
 
     // Development
-    grunt.registerTask('dev', ['default', 'watch']);
+    grunt.registerTask('build', ['default', 'watch']);
 
     // Testing
     grunt.registerTask('test', ['qunit']);
