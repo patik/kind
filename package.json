@@ -24,7 +24,7 @@
         "type": "git",
         "url": "http://github.com/patik/kind.git"
     },
-    "license": "MIT",
+    "license": "ISC",
     "bugs": {
         "url": "https://github.com/patik/kind/issues"
     },
