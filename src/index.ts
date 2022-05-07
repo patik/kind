@@ -33,30 +33,30 @@ export function kind(thing: unknown = undefined, deep = false): string {
 
     // String and number can be deep-searched
     if (['string', 'number'].includes(typeof thing)) {
-        if (deep) {
-            // Strings
-            if (typeof thing === 'string') {
-                if (!thing.length) {
-                    return 'emptystring'
-                } else {
-                    return 'string'
-                }
-            }
-
-            // Numbers
-            if (typeof thing === 'number') {
-                // Integer
-                if (parseInt(`${thing}`, 10) === thing) {
-                    return 'integer'
-                }
-
-                // Float
-                if (parseFloat(`${thing}`) === thing) {
-                    return 'float'
-                }
-            }
-        } else {
+        if (!deep) {
             return typeof thing
+        }
+
+        // Strings
+        if (typeof thing === 'string') {
+            if (!thing.length) {
+                return 'emptystring'
+            } else {
+                return 'string'
+            }
+        }
+
+        // Numbers
+        if (typeof thing === 'number') {
+            // Integer
+            if (parseInt(`${thing}`, 10) === thing) {
+                return 'integer'
+            }
+
+            // Float
+            if (parseFloat(`${thing}`) === thing) {
+                return 'float'
+            }
         }
     }
 

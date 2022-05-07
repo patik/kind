@@ -1,12 +1,16 @@
 import { kind } from '../src'
 
 describe('Standard types', () => {
-    test('String', () => {
-        expect(kind('{}')).toBe('string')
-    })
+    describe('String', () => {
+        test('Non-empty', () => {
+            expect(kind('{}')).toBe('string')
+            expect(kind('{}', true)).toBe('string')
+        })
 
-    test('String (empty)', () => {
-        expect(kind('')).toBe('string')
+        test('Empty', () => {
+            expect(kind('')).toBe('string')
+            expect(kind('', true)).toBe('emptystring')
+        })
     })
 
     test('Undefined', () => {
@@ -38,12 +42,16 @@ describe('Standard types', () => {
         expect(kind(!null)).toBe('boolean')
     })
 
-    test('Number (integer)', () => {
-        expect(kind(1)).toBe('number')
-    })
+    describe('Number', () => {
+        test('Integer', () => {
+            expect(kind(1)).toBe('number')
+            expect(kind(1, true)).toBe('integer')
+        })
 
-    test('Number (float)', () => {
-        expect(kind(1.21)).toBe('number')
+        test('Float', () => {
+            expect(kind(1.21)).toBe('number')
+            expect(kind(1.21, true)).toBe('float')
+        })
     })
 
     test('Null', () => {
@@ -107,16 +115,18 @@ describe('Built-in special objects', function () {
         expect(kind(new Date())).toBe('date')
     })
 
-    test('Regular expression (literal)', () => {
-        expect(kind(/regular\sexpression/)).toBe('regexp')
-    })
+    describe('Regular expression', () => {
+        test('Literal', () => {
+            expect(kind(/regular\sexpression/)).toBe('regexp')
+        })
 
-    test('Regular expression (constructor)', () => {
-        expect(kind(new RegExp('regular\\sexpression'))).toBe('regexp')
+        test('Constructor', () => {
+            expect(kind(new RegExp('regular\\sexpression'))).toBe('regexp')
+        })
     })
 
     test('Error', () => {
-        expect(kind(new Error('err'))).toBe('error')
+        expect(kind(new Error('foo'))).toBe('error')
     })
 
     test('Math', () => {
@@ -130,11 +140,16 @@ describe('Built-in special objects', function () {
             'click',
             function (evt) {
                 expect(kind(evt)).toBe('event')
+                expect(kind(evt, true)).toBe('mouseevent')
             },
             false,
         )
 
         testDiv.click()
+    })
+
+    test('Array', () => {
+        expect(kind(Array)).toBe('function')
     })
 })
 
