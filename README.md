@@ -37,10 +37,10 @@ Examples:
 
 
 ```ts
-import { kind } from 'kindjs';
+import kind from 'kindjs';
 
-kind('hello');
-//=> 'string'
+kind(['hello', 'world']);
+//=> 'array'
 ```
 
 ### Basic

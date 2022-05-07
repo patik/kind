@@ -1,4 +1,4 @@
-import { kind } from '../src'
+import kind from '../src'
 
 describe('Standard types', () => {
     describe('String', () => {

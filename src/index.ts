@@ -1,8 +1,10 @@
-/** @description Precise type-checker for JavaScript
- * @version 1.1.0
+/**
+ * @name kind
+ * @description Precise type-checker for JavaScript
+ * @version 2.0.0
  * @date 2022-05-07
  * @copyright 2022
- * @see https://github.com/patik/kind
+ * @link https://github.com/patik/kind
  */
 
 function isDomNode(thing: unknown): thing is Node {
@@ -10,13 +12,13 @@ function isDomNode(thing: unknown): thing is Node {
 }
 
 /**
- * Determine a variable's precise type
- * Objects are clarified if they're a common type (array, element, null, etc)
+ * @abstract Determine a variable's precise type
+ * @description Objects are clarified if they're a common type (array, element, null, etc)
  * @param    thing  Some variable to test
  * @param    deep   Whether to dive deeper into some types to return a more specific type
  * @return          Lowercase name for the variable's type
  */
-export function kind(thing: unknown = undefined, deep = false): string {
+function kind(thing: unknown = undefined, deep = false): string {
     /////////////////////////////
     // Basic, non-object types //
     /////////////////////////////
