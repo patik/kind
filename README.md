@@ -1,4 +1,6 @@
-# kindjs
+# Kind
+
+**A more precise version of JavaScript's `typeof`**
 
 [![npm package][npm-img]][npm-url]
 [![Build Status][build-img]][build-url]
@@ -8,88 +10,8 @@
 [![Commitizen Friendly][commitizen-img]][commitizen-url]
 [![Semantic Release][semantic-release-img]][semantic-release-url]
 
-<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
 
-[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
-
-<!-- ALL-CONTRIBUTORS-BADGE:END -->
-
-> My awesome module
-
-## Install
-
-```bash
-npm install kindjs
-```
-
-## Usage
-
-```ts
-import { kind } from 'kindjs';
-
-kind('hello');
-//=> 'string'
-```
-
-## API
-
-### kind(input, options?)
-
-#### input
-
-Type: `string`
-
-Lorem ipsum.
-
-#### options
-
-Type: `object`
-
-##### postfix
-
-Type: `string`
-Default: `rainbows`
-
-Lorem ipsum.
-
-[build-img]: https://github.com/patik/typescript-npm-package-template/actions/workflows/release.yml/badge.svg
-[build-url]: https://github.com/patik/typescript-npm-package-template/actions/workflows/release.yml
-[downloads-img]: https://img.shields.io/npm/dt/typescript-npm-package-template
-[downloads-url]: https://www.npmtrends.com/typescript-npm-package-template
-[npm-img]: https://img.shields.io/npm/v/typescript-npm-package-template
-[npm-url]: https://www.npmjs.com/package/typescript-npm-package-template
-[issues-img]: https://img.shields.io/github/issues/patik/typescript-npm-package-template
-[issues-url]: https://github.com/patik/typescript-npm-package-template/issues
-[codecov-img]: https://codecov.io/gh/patik/typescript-npm-package-template/branch/main/graph/badge.svg
-[codecov-url]: https://codecov.io/gh/patik/typescript-npm-package-template
-[semantic-release-img]: https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg
-[semantic-release-url]: https://github.com/semantic-release/semantic-release
-[commitizen-img]: https://img.shields.io/badge/commitizen-friendly-brightgreen.svg
-[commitizen-url]: http://commitizen.github.io/cz-cli/
-
-## Contributors ✨
-
-Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
-
-<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
-<!-- prettier-ignore-start -->
-<!-- markdownlint-disable -->
-<table>
-  <tr>
-    <td align="center"><a href="https://patik.com"><img src="https://avatars.githubusercontent.com/u/9534477?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Craig Patik</b></sub></a><br /><a href="https://github.com/patik/typescript-npm-package-template/commits?author=patik" title="Code">💻</a></td>
-  </tr>
-</table>
-
-<!-- markdownlint-restore -->
-<!-- prettier-ignore-end -->
-
-<!-- ALL-CONTRIBUTORS-LIST:END -->
-
-This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
-
-# Kind
-
-**A more precise version of JavaScript's `typeof`**
+## Description
 
 `kind()` returns a *useful* name for a variable's type. It breaks down objects into more precise terms: array, null, element, etc.
 
@@ -105,17 +27,21 @@ Examples:
 | `new Date()` | `"object"` | `"date"` |
 | `{}` | `"object"` | `"object"` (if no special type was detected &mdash; see full list below) |
 
-## Installation
+## Install
+
+**yarn**: `yarn add kindjs`
 
 **npm**: `npm install kindjs`
 
-**Bower**: `bower install kind`
-
-Or just download [kind.js](https://github.com/patik/kind/blob/master/kind.js) and reference it in your page with a `<script>` tag.
-
 ## Usage
 
-Available as a CommonJS module (e.g with RequireJS) or as a global method, `kind()`.
+
+```ts
+import { kind } from 'kindjs';
+
+kind('hello');
+//=> 'string'
+```
 
 ### Basic
 
@@ -184,12 +110,27 @@ A complete list is noted below
 - Always returns a simple lowercase string, just like the native `typeof`
 - Handles undefined or undeclared variables
 - Optimized to check for the most common types first
-- Excellent browser support
+- Excellent browser support, including many very old browsers
     + IE 6+ (and maybe older)
     + Chrome
     + Firefox
     + Safari
     + Android 1+
-    + Opera
+    + Opera (pre-Blink)
     + Netscape 4 (in theory!)
     + Probably anything that runs JavaScript and supports regular expressions
+
+[build-img]: https://github.com/patik/typescript-npm-package-template/actions/workflows/release.yml/badge.svg
+[build-url]: https://github.com/patik/typescript-npm-package-template/actions/workflows/release.yml
+[downloads-img]: https://img.shields.io/npm/dt/typescript-npm-package-template
+[downloads-url]: https://www.npmtrends.com/typescript-npm-package-template
+[npm-img]: https://img.shields.io/npm/v/typescript-npm-package-template
+[npm-url]: https://www.npmjs.com/package/typescript-npm-package-template
+[issues-img]: https://img.shields.io/github/issues/patik/typescript-npm-package-template
+[issues-url]: https://github.com/patik/typescript-npm-package-template/issues
+[codecov-img]: https://codecov.io/gh/patik/typescript-npm-package-template/branch/main/graph/badge.svg
+[codecov-url]: https://codecov.io/gh/patik/typescript-npm-package-template
+[semantic-release-img]: https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg
+[semantic-release-url]: https://github.com/semantic-release/semantic-release
+[commitizen-img]: https://img.shields.io/badge/commitizen-friendly-brightgreen.svg
+[commitizen-url]: http://commitizen.github.io/cz-cli/
