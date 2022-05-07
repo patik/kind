@@ -26,3 +26,6 @@ node_modules/
 # dotenv environment variables file
 .env.test
 .env.local
+
+# Compiled code
+lib/

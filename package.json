@@ -9,7 +9,6 @@
     "scripts": {
         "build": "tsc",
         "clean": "rm -rf ./lib/",
-        "cm": "cz",
         "coverage": "codecov",
         "lint": "eslint ./src/ --fix",
         "prepare": "husky install",
@@ -32,15 +31,12 @@
         "node": ">=12.0"
     },
     "keywords": [
-        "boilerplate",
-        "template",
-        "typescript",
-        "vscode",
-        "jest",
-        "husky",
-        "commitizen",
-        "semantic-release",
-        "codecov"
+        "typeof",
+        "javascript",
+        "type",
+        "type checking",
+        "object",
+        "typescript"
     ],
     "bugs": {
         "url": "https://github.com/patik/kind/issues"
@@ -53,8 +49,6 @@
         "@typescript-eslint/eslint-plugin": "^4.22.0",
         "@typescript-eslint/parser": "^4.22.0",
         "codecov": "^3.8.1",
-        "commitizen": "^4.2.4",
-        "cz-conventional-changelog": "^3.3.0",
         "eslint": "^7.25.0",
         "eslint-config-prettier": "^8.3.0",
         "eslint-plugin-node": "^11.1.0",
@@ -68,11 +62,6 @@
         "ts-jest": "^28.0.1",
         "ts-node": "^10.2.1",
         "typescript": "^4.2.4"
-    },
-    "config": {
-        "commitizen": {
-            "path": "./node_modules/cz-conventional-changelog"
-        }
     },
     "lint-staged": {
         "*.ts": "eslint --cache --cache-location .eslintcache --fix"
