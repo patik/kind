@@ -3,6 +3,7 @@
     "version": "2.0.0",
     "description": "Precise type-checker for JavaScript",
     "main": "./lib/src/index.js",
+    "types": "./lib/src/index.d.ts",
     "files": [
         "lib/**/*"
     ],
