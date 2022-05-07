@@ -1,140 +1,227 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 import { kind } from '../src'
 
-describe('index', () => {
-    describe('Standard types', () => {
-        test('String', () => {
-            expect(kind('{}')).toBe('string')
-        })
+describe('Standard types', () => {
+    test('String', () => {
+        expect(kind('{}')).toBe('string')
+    })
 
-        test('String (empty)', () => {
-            expect(kind('')).toBe('string')
-        })
+    test('String (empty)', () => {
+        expect(kind('')).toBe('string')
+    })
 
-        test('Undefined', () => {
-            expect(kind()).toBe('undefined')
-        })
+    test('Undefined', () => {
+        expect(kind()).toBe('undefined')
+    })
 
-        test('Anonymous function', () => {
-            expect(kind(function () {})).toBe('function')
-        })
+    test('Anonymous function', () => {
+        expect(kind(function () {})).toBe('function')
+    })
 
-        test('Arrow function', () => {
-            expect(kind(() => {})).toBe('function')
-        })
+    test('Arrow function', () => {
+        expect(kind(() => {})).toBe('function')
+    })
 
-        test('Defined function', () => {
-            expect(kind(kind)).toBe('function')
-        })
+    test('Defined function', () => {
+        expect(kind(kind)).toBe('function')
+    })
 
-        // test('DOM method', () => {
-        //     expect(kind(document.getElementById)).toBe('function')
-        // })
+    // test('DOM method', () => {
+    //     expect(kind(document.getElementById)).toBe('function')
+    // })
 
-        test('Boolean', () => {
-            expect(kind(false)).toBe('boolean')
-        })
+    test('Boolean', () => {
+        expect(kind(false)).toBe('boolean')
+    })
 
-        test('Boolean (coerced)', () => {
-            expect(kind(!null)).toBe('boolean')
-        })
+    test('Boolean (coerced)', () => {
+        expect(kind(!null)).toBe('boolean')
+    })
 
-        test('Number (integer)', () => {
-            expect(kind(1)).toBe('number')
-        })
+    test('Number (integer)', () => {
+        expect(kind(1)).toBe('number')
+    })
 
-        test('Number (float)', () => {
-            expect(kind(1.21)).toBe('number')
-        })
+    test('Number (float)', () => {
+        expect(kind(1.21)).toBe('number')
+    })
 
-        test('Null', () => {
-            expect(kind(null)).toBe('null')
-        })
+    test('Null', () => {
+        expect(kind(null)).toBe('null')
+    })
 
-        test('Undefined', () => {
-            expect(kind(undefined)).toBe('undefined')
-        })
+    test('Undefined', () => {
+        expect(kind(undefined)).toBe('undefined')
     })
 })
 
-// test('Null', function() {
-//   ok(kind(null) === 'null', 'Literal null');
-//   ok(kind(document.getElementById('nonexistent')) === 'null', 'No element found with given ID');
-// });
+describe('Null', function () {
+    test('Literal null', () => {
+        expect(kind(null)).toBe('null')
+    })
 
-// test('Array', function() {
-//   ok(kind([1,2,3]) === 'array', 'Standard array properly detected');
-//   ok(kind([]) === 'array', 'Empty array properly detected');
-//   ok(kind(new Array(1)) === 'array', 'Array constructor detected');
-//   ok(kind(document.getElementsByTagName('div')) !== 'array', 'Nodelist not considered an array');
-//   ok(kind('str') !== 'array', 'String with `length` not considered an array');
-// });
+    test('No element found with given ID', () => {
+        expect(kind(document.getElementById('nonexistent'))).toBe('null')
+    })
+})
 
-// test('Array-like objects', function() {
-//   ok(kind(arguments) === 'arraylike', 'Arguments');
-//   ok(kind([1,2,3]) !== 'arraylike', 'Standard array not considered arraylike');
-//   ok(kind(document.getElementsByTagName('div')) !== 'arraylike', 'Nodelist not considered arraylike');
-// });
+describe('Array', function () {
+    test('Standard array properly detected', () => {
+        expect(kind([1, 2, 3])).toBe('array')
+    })
 
-// test('Built-in special objects', function() {
-//   ok(kind(new Date()) === 'date', 'Date');
-//   ok(kind(/regular\sexpression/) === 'regexp', 'Regular expression (literal)');
-//   ok(kind(new RegExp('regular\\sexpression')) === 'regexp', 'Regular expression (constructor)');
-//   ok(kind(new Error('err')) === 'error', 'Error');
-//   ok(kind(Math) === 'math', 'Math');
+    test('Empty array properly detected', () => {
+        expect(kind([])).toBe('array')
+    })
 
-//   if (navigator.userAgent.indexOf('PhantomJS') === -1) {
-//       if (testDiv.addEventListener) {
-//           testDiv.addEventListener('click', function(evt) {
-//               ok(kind(evt) === 'event', 'Event');
-//           }, false);
+    test('Array constructor detected', () => {
+        expect(kind(new Array(1))).toBe('array')
+    })
 
-//           testDiv.click();
-//       }
-//       else {
-//           testDiv.attachEvent('onclick', function(evt) {
-//               ok(kind(evt) === 'event', 'Event');
-//           });
+    test('Nodelist not considered an array', () => {
+        expect(kind(document.getElementsByTagName('div'))).not.toBe('array')
+    })
 
-//           testDiv.onclick();
-//       }
-//   }
-// });
+    test('String with `length` not considered an array', () => {
+        expect(kind('str')).not.toBe('array')
+    })
+})
 
-// test('Elements and nodes', function() {
-//   var elems = document.getElementsByTagName('*');
+describe('Array-like objects', function () {
+    // test('Arguments', () => {
+    //     function foo() {
+    //         expect(kind(arguments)).toBe('arraylike')
+    //     }
+    // })
 
-//   ok(kind(elems[0]) === 'element', 'Single item from nodelist detected as an element');
-//   ok(kind(testDiv) === 'element', 'getElementById result is an element');
+    test('Standard array not considered arraylike', () => {
+        expect(kind([1, 2, 3])).not.toBe('arraylike')
+    })
 
-//   // PhantomJS returns an incorrect value for this test, but it works correctly in browsers
-//   if (navigator.userAgent.indexOf('PhantomJS') !== -1) {
-//       // PhantomJS
-//       ok(kind(elems) === 'function', 'Result of getElementsByTagName is a nodelist');
-//   }
-//   else {
-//       // Browser
-//       ok(kind(elems) === 'nodelist', 'Result of getElementsByTagName is a nodelist');
-//   }
+    test('Nodelist not considered arraylike', () => {
+        expect(kind(document.getElementsByTagName('div'))).not.toBe('arraylike')
+    })
+})
 
-//   ok(kind(document.body) === 'element', 'document.body is an element');
-//   ok(kind(document.documentElement) === 'element', 'document.documentElement is an element');
-//   ok(kind(document.getElementsByTagName('nonexistent')[0]) === 'undefined', 'Empty nodelist item detected as undefined');
-// });
+describe('Built-in special objects', function () {
+    test('Date', () => {
+        expect(kind(new Date())).toBe('date')
+    })
 
-// test('Elements and nodes (deep)', function() {
-//   ok(kind(testDiv.nextSibling, true) === 'comment', 'Comment is detected');
-//   ok(kind(document, true) === 'document', 'document is a node');
-// });
+    test('Regular expression (literal)', () => {
+        expect(kind(/regular\sexpression/)).toBe('regexp')
+    })
 
-// test('Plain object', function() {
-//   var elems = document.getElementsByTagName('*');
+    test('Regular expression (constructor)', () => {
+        expect(kind(new RegExp('regular\\sexpression'))).toBe('regexp')
+    })
 
-//   ok(kind({foo:'bar'}) === 'object', 'Standard object declaration');
-//   ok(kind({}) === 'object', 'Standard object declaration (empty)');
-//   ok(kind(new Object()) === 'object', 'Object constructor');
-//   ok(kind([1,2]) !== 'object', 'Array not considered an object');
-//   ok(kind(elems) !== 'object', 'Nodelist not considered an object');
-//   ok(kind(elems[0]) !== 'object', 'Element not considered an object');
-//   ok(kind(document.createTextNode('')) !== 'object', 'Text node not considered an object');
-// });
+    test('Error', () => {
+        expect(kind(new Error('err'))).toBe('error')
+    })
+
+    test('Math', () => {
+        expect(kind(Math)).toBe('math')
+    })
+
+    // if (navigator.userAgent.indexOf('PhantomJS') === -1) {
+    //     if (testDiv.addEventListener) {
+    //         test('Event', () => {
+    //             testDiv.addEventListener(
+    //                 'click',
+    //                 function (evt) {
+    //                     expect(kind(evt)).toBe('event')
+    //                 },
+    //                 false,
+    //             )
+
+    //             testDiv.click()
+    //         })
+    //     } else {
+    //         test('Event', () => {
+    //             testDiv.attachEvent('onclick', function (evt) {
+    //                 expect(kind(evt)).toBe('event')
+    //             })
+
+    //             testDiv.onclick()
+    //         })
+    //     }
+    // }
+})
+
+describe('Elements and nodes', function () {
+    const elems = document.getElementsByTagName('*')
+
+    test('Single item from nodelist detected as an element', () => {
+        expect(kind(elems[0])).toBe('element')
+    })
+
+    // test('getElementById result is an element', () => {
+    //     expect(kind(testDiv)).toBe('element')
+    // })
+
+    // PhantomJS returns an incorrect value for this test, but it works correctly in browsers
+    if (navigator.userAgent.indexOf('PhantomJS') !== -1) {
+        // PhantomJS
+        test('Result of getElementsByTagName is a nodelist', () => {
+            expect(kind(elems)).toBe('function')
+        })
+    } else {
+        // Browser
+        test('Result of getElementsByTagName is a nodelist', () => {
+            expect(kind(elems)).toBe('nodelist')
+        })
+    }
+
+    test('document.body is an element', () => {
+        expect(kind(document.body)).toBe('element')
+    })
+    test('document.documentElement is an element', () => {
+        expect(kind(document.documentElement)).toBe('element')
+    })
+    test('Empty nodelist item detected as undefined', () => {
+        expect(kind(document.getElementsByTagName('nonexistent')[0])).toBe('undefined')
+    })
+})
+
+// describe('Elements and nodes (deep)', function () {
+//     test('Comment is detected', () => {
+//         expect(kind(testDiv.nextSibling, true)).toBe('comment')
+//     })
+
+//     test('document is a node', () => {
+//         expect(kind(document, true)).toBe('document')
+//     })
+// })
+
+describe('Plain object', function () {
+    test('Standard object declaration', () => {
+        expect(kind({ foo: 'bar' })).toBe('object')
+    })
+
+    test('Standard object declaration (empty)', () => {
+        expect(kind({})).toBe('object')
+    })
+
+    test('Object constructor', () => {
+        expect(kind(new Object())).toBe('object')
+    })
+
+    test('Array not considered an object', () => {
+        expect(kind([1, 2])).not.toBe('object')
+    })
+
+    // const elems = document.getElementsByTagName('*')
+
+    // test('Nodelist not considered an object', () => {
+    //     expect(kind(elems)).not.toBe('object')
+    // })
+
+    // test('Element not considered an object', () => {
+    //     expect(kind(elems[0])).not.toBe('object')
+    // })
+
+    // test('Text node not considered an object', () => {
+    //     expect(kind(document.createTextNode(''))).not.toBe('object')
+    // })
+})
