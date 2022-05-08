@@ -2,14 +2,14 @@
     "name": "kindjs",
     "version": "2.0.0",
     "description": "Precise type-checker for JavaScript",
-    "main": "./lib/src/index.js",
-    "types": "./lib/src/index.d.ts",
+    "main": "./dist/src/index.js",
+    "types": "./dist/src/index.d.ts",
     "files": [
-        "lib/**/*"
+        "dist/**/*"
     ],
     "scripts": {
         "build": "tsc",
-        "clean": "rm -rf ./lib/",
+        "clean": "rm -rf ./dist/",
         "coverage": "codecov",
         "lint": "eslint ./src/ --fix",
         "prepare": "husky install",

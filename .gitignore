@@ -28,4 +28,4 @@ node_modules/
 .env.local
 
 # Compiled code
-lib/
+dist/
