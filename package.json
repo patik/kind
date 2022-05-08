@@ -1,41 +1,75 @@
 {
     "name": "kindjs",
+    "version": "2.0.0",
     "description": "Precise type-checker for JavaScript",
-    "version": "1.0.4",
-    "main": "kind",
-    "author": "Craig Patik <craig@patik.com> (http://patik.com)",
-    "devDependencies": {
-        "grunt": "^0.4.5",
-        "grunt-contrib-jshint": "^0.11.0",
-        "grunt-contrib-qunit": "^0.5.2",
-        "grunt-contrib-uglify": "^0.8.0",
-        "grunt-contrib-watch": "^0.6.1",
-        "grunt-markdown": "^0.7.0",
-        "load-grunt-tasks": "^3.1.0"
+    "main": "./dist/src/index.js",
+    "types": "./dist/src/index.d.ts",
+    "files": [
+        "dist/**/*"
+    ],
+    "scripts": {
+        "build": "tsc",
+        "clean": "rm -rf ./dist/",
+        "coverage": "codecov",
+        "lint": "eslint ./src/ --fix",
+        "prepare": "husky install",
+        "semantic-release": "semantic-release",
+        "test:watch": "jest --watch",
+        "test": "jest --coverage",
+        "typecheck": "tsc --noEmit"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/patik/kind.git"
+    },
+    "license": "ISC",
+    "author": {
+        "name": "Craig Patik",
+        "email": "craig@patik.com",
+        "url": "https://github.com/patik"
+    },
+    "engines": {
+        "node": ">=14.0"
     },
     "keywords": [
         "typeof",
-        "JavaScript",
+        "javascript",
         "type",
         "type checking",
-        "object"
+        "object",
+        "typescript"
     ],
-    "repository": {
-        "type": "git",
-        "url": "http://github.com/patik/kind.git"
-    },
-    "license": "ISC",
     "bugs": {
         "url": "https://github.com/patik/kind/issues"
     },
-    "homepage": "https://github.com/patik/kind",
-    "directories": {
-        "test": "test"
+    "homepage": "https://github.com/patik/kind#readme",
+    "dependencies": {},
+    "devDependencies": {
+        "@types/jest": "^27.5.0",
+        "@types/node": "^17.0.31",
+        "@typescript-eslint/eslint-plugin": "^5.22.0",
+        "@typescript-eslint/parser": "^5.22.0",
+        "codecov": "^3.8.1",
+        "eslint": "^8.15.0",
+        "eslint-config-prettier": "^8.3.0",
+        "eslint-plugin-node": "^11.1.0",
+        "eslint-plugin-prettier": "^4.0.0",
+        "husky": "^7.0.4",
+        "jest": "^28.1.0",
+        "jest-environment-jsdom": "^28.1.0",
+        "lint-staged": "^12.4.1",
+        "prettier": "^2.2.1",
+        "semantic-release": "^19.0.2",
+        "ts-jest": "^28.0.1",
+        "ts-node": "^10.2.1",
+        "typescript": "^4.2.4"
     },
-    "dependencies": {
-        "grunt": "^0.4.5"
+    "lint-staged": {
+        "*.ts": "eslint --cache --cache-location .eslintcache --fix"
     },
-    "scripts": {
-        "test": "test/unit/kind.js"
+    "release": {
+        "branches": [
+            "main"
+        ]
     }
 }
