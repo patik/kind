@@ -120,16 +120,16 @@ A complete list is noted below
     + Netscape 4 (in theory!)
     + Probably anything that runs JavaScript and supports regular expressions
 
-[build-img]: https://github.com/patik/typescript-npm-package-template/actions/workflows/release.yml/badge.svg
-[build-url]: https://github.com/patik/typescript-npm-package-template/actions/workflows/release.yml
-[downloads-img]: https://img.shields.io/npm/dt/typescript-npm-package-template
-[downloads-url]: https://www.npmtrends.com/typescript-npm-package-template
-[npm-img]: https://img.shields.io/npm/v/typescript-npm-package-template
-[npm-url]: https://www.npmjs.com/package/typescript-npm-package-template
-[issues-img]: https://img.shields.io/github/issues/patik/typescript-npm-package-template
-[issues-url]: https://github.com/patik/typescript-npm-package-template/issues
-[codecov-img]: https://codecov.io/gh/patik/typescript-npm-package-template/branch/main/graph/badge.svg
-[codecov-url]: https://codecov.io/gh/patik/typescript-npm-package-template
+[build-img]: https://github.com/patik/kind/actions/workflows/release.yml/badge.svg
+[build-url]: https://github.com/patik/kind/actions/workflows/release.yml
+[downloads-img]: https://img.shields.io/npm/dt/kindjs
+[downloads-url]: https://www.npmtrends.com/kindjs
+[npm-img]: https://img.shields.io/npm/v/kindjs
+[npm-url]: https://www.npmjs.com/package/kindjs
+[issues-img]: https://img.shields.io/github/issues/patik/kind
+[issues-url]: https://github.com/patik/kind/issues
+[codecov-img]: https://codecov.io/gh/patik/kind/branch/main/graph/badge.svg
+[codecov-url]: https://codecov.io/gh/patik/kind
 [semantic-release-img]: https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg
 [semantic-release-url]: https://github.com/semantic-release/semantic-release
 [commitizen-img]: https://img.shields.io/badge/commitizen-friendly-brightgreen.svg
