@@ -164,7 +164,7 @@ describe('Elements and nodes', function () {
         expect(kind(document.createElement('div'))).toBe('element')
     })
 
-    xtest('Result of getElementsByTagName is a nodelist', () => {
+    test('Result of getElementsByTagName is a nodelist', () => {
         expect(kind(elems)).toBe('nodelist')
     })
 
@@ -180,11 +180,16 @@ describe('Elements and nodes', function () {
 })
 
 describe('Elements and nodes (deep)', function () {
-    xtest('Comment is detected', () => {
-        expect(kind(document.createElement('div').nextSibling, true)).toBe('comment')
+    test('Comment is detected', () => {
+        const div = document.createElement('div')
+
+        div.innerHTML = '<p>hello</p><!-- here is a comment -->'
+
+        expect(kind(div.firstChild, true)).toBe('element')
+        expect(kind(div.childNodes[1], true)).toBe('comment')
     })
 
-    xtest('document is a node', () => {
+    test('document is a node', () => {
         expect(kind(document, true)).toBe('document')
     })
 })
@@ -208,7 +213,7 @@ describe('Plain object', function () {
 
     const elems = document.getElementsByTagName('*')
 
-    xtest('Nodelist not considered an object', () => {
+    test('Nodelist not considered an object', () => {
         expect(kind(elems)).not.toBe('object')
     })
 
@@ -216,7 +221,7 @@ describe('Plain object', function () {
         expect(kind(elems[0])).not.toBe('object')
     })
 
-    xtest('Text node not considered an object', () => {
+    test('Text node not considered an object', () => {
         expect(kind(document.createTextNode(''))).not.toBe('object')
     })
 })

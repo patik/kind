@@ -134,12 +134,7 @@ function kind(thing: unknown = undefined, deep = false): string {
             }
 
             // DOM Level 1
-            if (
-                'nodeType' in thing &&
-                Object.prototype.hasOwnProperty.call(thing, 'nodeType') &&
-                typeof thing.nodeType === 'number' &&
-                typeof thing.nodeName === 'string'
-            ) {
+            if ('nodeType' in thing && typeof thing.nodeType === 'number' && typeof thing.nodeName === 'string') {
                 if (deep && thing.nodeType.toString() in nodeTypes) {
                     return nodeTypes[thing.nodeType]
                 }
@@ -150,20 +145,29 @@ function kind(thing: unknown = undefined, deep = false): string {
 
         // Node lists
         if (
-            thing instanceof NodeList &&
             /^\[object (HTMLCollection|NodeList|Object)\]$/.test(objectType) &&
+            'length' in thing &&
             typeof thing.length === 'number' &&
-            typeof thing.item !== 'undefined' &&
-            (thing.length === 0 || (typeof thing[0] === 'object' && thing[0].nodeType > 0))
+            'item' in thing &&
+            typeof thing.item !== 'undefined'
         ) {
-            return 'nodelist'
+            if (thing.length === 0) {
+                return 'nodelist'
+            }
+
+            if ('0' in thing && typeof thing[0] === 'object') {
+                const firstElement = thing[0]
+
+                if (firstElement && 'nodeType' in firstElement && firstElement.nodeType && firstElement.nodeType > 0) {
+                    return 'nodelist'
+                }
+            }
         }
 
         // Array-like object
         if (
             'length' in thing &&
             Object.prototype.hasOwnProperty.call(thing, 'length') &&
-            // @ts-ignore
             typeof thing.length === 'number' &&
             thing !== window
         ) {
