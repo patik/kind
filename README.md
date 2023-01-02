@@ -19,6 +19,7 @@ Examples:
 |:---------------|:--------|:------------|
 | `[1, 2, 3]` | `"object"` | `"array"` |
 | `null` | `"object"` | `"null"` |
+| `new Promise(() => null)` | `"object"` | `"promise"` |
 | `document.getElementById('id')` | `"object"` | `"element"` |
 | `document.getElementsByTagName('div')` | `"object"` | `"nodelist"` |
 | `document.createTextNode('')` | `"object"` | `"node"` |
@@ -80,7 +81,7 @@ A complete list is noted below
 ## Supported types
 
 - All standard types normally returned by `typeof`:
-  - `function`, `undefined`, `boolean`
+  - `function`, `undefined`, `boolean`, `symbol`
   - `string`
     - Deep option returns either `string` or `emptystring`
   - `number`
@@ -100,6 +101,11 @@ A complete list is noted below
 - `error`
 - `errorevent`
 - `math`
+- `promise`
+- `set`
+- `url` (i.e. an instance of the `URL()` constructor)
+- `urlsearchparams`
+- `map`
 
 ## Features
 

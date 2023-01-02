@@ -20,7 +20,7 @@ function kind(thing: unknown = undefined, deep = false): string {
     }
 
     // Standard types except string and number
-    if (['function', 'undefined', 'boolean'].includes(typeof thing)) {
+    if (['function', 'undefined', 'boolean', 'symbol'].includes(typeof thing)) {
         return typeof thing
     }
 
@@ -61,7 +61,20 @@ function kind(thing: unknown = undefined, deep = false): string {
         const objectType = Object.prototype.toString.call(thing)
 
         // Special JavaScript types that inherit from Object
-        const specialTypes = ['Math', 'ErrorEvent', 'Error', 'Date', 'RegExp', 'Event', 'Array']
+        const specialTypes = [
+            'Array',
+            'Date',
+            'Error',
+            'ErrorEvent',
+            'Event',
+            'Map',
+            'Math',
+            'Promise',
+            'RegExp',
+            'Set',
+            'URL',
+            'URLSearchParams',
+        ]
         let i = specialTypes.length
 
         while (i--) {
