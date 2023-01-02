@@ -2,8 +2,6 @@
  * @name kind
  * @description Precise type-checker for JavaScript
  * @version 2.0.0
- * @date 2022-05-07
- * @copyright 2022
  * @link https://github.com/patik/kind
  */
 

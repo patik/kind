@@ -11,12 +11,13 @@
         "build": "tsc",
         "clean": "rm -rf ./dist/",
         "coverage": "codecov",
-        "lint": "eslint ./src/ --fix",
+        "lint": "eslint ./src/ --fix && yarn typecheck",
         "prepare": "husky install",
         "semantic-release": "semantic-release",
         "test:watch": "jest --watch",
         "test": "jest --coverage",
-        "typecheck": "tsc --noEmit"
+        "typecheck": "tsc --noEmit",
+        "postinstall": "yarn prepare"
     },
     "repository": {
         "type": "git",
