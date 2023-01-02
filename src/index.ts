@@ -1,10 +1,3 @@
-/**
- * @name kind
- * @description Precise type-checker for JavaScript
- * @version 2.0.0
- * @link https://github.com/patik/kind
- */
-
 function isDomNode(thing: unknown): thing is Node {
     return Boolean(thing) && thing instanceof Node && 'nodeName' in thing
 }
