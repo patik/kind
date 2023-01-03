@@ -7,7 +7,6 @@
 [![Downloads][downloads-img]][downloads-url]
 [![Issues][issues-img]][issues-url]
 [![Code Coverage][codecov-img]][codecov-url]
-[![Semantic Release][semantic-release-img]][semantic-release-url]
 
 ## Description
 
@@ -133,5 +132,3 @@ A complete list is noted below
 [issues-url]: https://github.com/patik/kind/issues
 [codecov-img]: https://codecov.io/gh/patik/kind/branch/main/graph/badge.svg
 [codecov-url]: https://codecov.io/gh/patik/kind
-[semantic-release-img]: https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg
-[semantic-release-url]: https://github.com/semantic-release/semantic-release
