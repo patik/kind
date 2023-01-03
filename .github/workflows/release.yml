@@ -22,11 +22,10 @@ jobs:
           node-version: lts/*
       - name: Install dependencies
         run: yarn install
-        run: yarn build
-      - name: Test
-        run: yarn test
       - name: Build
         run: yarn run build
+      - name: Test
+        run: yarn test
       - name: Release
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
