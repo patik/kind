@@ -1,12 +1,3 @@
-/**
- * @name kind
- * @description Precise type-checker for JavaScript
- * @version 2.0.0
- * @date 2022-05-07
- * @copyright 2022
- * @link https://github.com/patik/kind
- */
-
 function isDomNode(thing: unknown): thing is Node {
     return Boolean(thing) && thing instanceof Node && 'nodeName' in thing
 }
@@ -29,7 +20,7 @@ function kind(thing: unknown = undefined, deep = false): string {
     }
 
     // Standard types except string and number
-    if (['function', 'undefined', 'boolean'].includes(typeof thing)) {
+    if (['function', 'undefined', 'boolean', 'symbol'].includes(typeof thing)) {
         return typeof thing
     }
 
@@ -70,7 +61,20 @@ function kind(thing: unknown = undefined, deep = false): string {
         const objectType = Object.prototype.toString.call(thing)
 
         // Special JavaScript types that inherit from Object
-        const specialTypes = ['Math', 'ErrorEvent', 'Error', 'Date', 'RegExp', 'Event', 'Array']
+        const specialTypes = [
+            'Array',
+            'Date',
+            'Error',
+            'ErrorEvent',
+            'Event',
+            'Map',
+            'Math',
+            'Promise',
+            'RegExp',
+            'Set',
+            'URL',
+            'URLSearchParams',
+        ]
         let i = specialTypes.length
 
         while (i--) {
@@ -136,12 +140,7 @@ function kind(thing: unknown = undefined, deep = false): string {
             }
 
             // DOM Level 1
-            if (
-                'nodeType' in thing &&
-                Object.prototype.hasOwnProperty.call(thing, 'nodeType') &&
-                typeof thing.nodeType === 'number' &&
-                typeof thing.nodeName === 'string'
-            ) {
+            if ('nodeType' in thing && typeof thing.nodeType === 'number' && typeof thing.nodeName === 'string') {
                 if (deep && thing.nodeType.toString() in nodeTypes) {
                     return nodeTypes[thing.nodeType]
                 }
@@ -152,20 +151,29 @@ function kind(thing: unknown = undefined, deep = false): string {
 
         // Node lists
         if (
-            thing instanceof NodeList &&
             /^\[object (HTMLCollection|NodeList|Object)\]$/.test(objectType) &&
+            'length' in thing &&
             typeof thing.length === 'number' &&
-            typeof thing.item !== 'undefined' &&
-            (thing.length === 0 || (typeof thing[0] === 'object' && thing[0].nodeType > 0))
+            'item' in thing &&
+            typeof thing.item !== 'undefined'
         ) {
-            return 'nodelist'
+            if (thing.length === 0) {
+                return 'nodelist'
+            }
+
+            if ('0' in thing && typeof thing[0] === 'object') {
+                const firstElement = thing[0]
+
+                if (firstElement && 'nodeType' in firstElement && firstElement.nodeType && firstElement.nodeType > 0) {
+                    return 'nodelist'
+                }
+            }
         }
 
         // Array-like object
         if (
             'length' in thing &&
             Object.prototype.hasOwnProperty.call(thing, 'length') &&
-            // @ts-ignore
             typeof thing.length === 'number' &&
             thing !== window
         ) {
