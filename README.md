@@ -122,8 +122,8 @@ A complete list is noted below
   - Netscape 4 (in theory!)
   - Probably anything that runs JavaScript and supports regular expressions
 
-[build-img]: https://github.com/patik/kind/actions/workflows/release.yml/badge.svg
-[build-url]: https://github.com/patik/kind/actions/workflows/release.yml
+[build-img]: https://github.com/patik/kind/actions/workflows/linting-and-unit-tests.yml/badge.svg
+[build-url]: https://github.com/patik/kind/actions/workflows/linting-and-unit-tests.yml
 [downloads-img]: https://img.shields.io/npm/dt/kindjs
 [downloads-url]: https://www.npmtrends.com/kindjs
 [npm-img]: https://img.shields.io/npm/v/kindjs
