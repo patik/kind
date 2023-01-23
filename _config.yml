@@ -12,8 +12,8 @@ description: >
 
 theme: minima
 
-plugins:
-  - jekyll-seo-tag
+# plugins:
+#   - jekyll-seo-tag
 
 # Theme-specific settings
 

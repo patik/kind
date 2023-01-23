@@ -1,4 +1,4 @@
-# Kind.js
+# [Kind.js](https://github.com/patik/kind)
 
 **A precise typechecker for JavaScript**
 
