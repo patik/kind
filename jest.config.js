@@ -2,7 +2,7 @@
 module.exports = {
     preset: 'ts-jest',
     testEnvironment: 'jest-environment-jsdom',
-    testMatch: ['**/test/**/*.spec.ts'],
+    testMatch: ['**/*.test.ts'],
     collectCoverageFrom: ['<rootDir>/src/**/*.ts', '!<rootDir>/src/types/**/*.ts'],
     globals: {
         transform: {
