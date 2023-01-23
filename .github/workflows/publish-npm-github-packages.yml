@@ -36,6 +36,7 @@ jobs:
       - run: yarn publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
+          NODE_PUBLISH_TOKEN: ${{secrets.NODE_PUBLISH_TOKEN}}
 
   publish-gpr:
     needs: build

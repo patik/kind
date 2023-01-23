@@ -2,6 +2,49 @@ function isDomNode(thing: unknown): thing is Node {
     return Boolean(thing) && thing instanceof Node && 'nodeName' in thing
 }
 
+type KnownType =
+    | 'null'
+    | 'function'
+    | 'undefined'
+    | 'boolean'
+    | 'symbol'
+    | 'string'
+    | 'number'
+    | 'emptystring'
+    | 'bigint'
+    | 'integer'
+    | 'float'
+    | 'array'
+    | 'date'
+    | 'error'
+    | 'errorevent'
+    | 'event'
+    | 'map'
+    | 'math'
+    | 'promise'
+    | 'regexp'
+    | 'set'
+    | 'url'
+    | 'urlsearchparams'
+    | 'event'
+    | 'element'
+    | 'attribute'
+    | 'text'
+    | 'cdata'
+    | 'entityreference'
+    | 'entity'
+    | 'processinginstruction'
+    | 'comment'
+    | 'document'
+    | 'documenttype'
+    | 'documentfragment'
+    | 'notation'
+    | 'node'
+    | 'nodelist'
+    | 'arraylike'
+    | 'object'
+    | 'unknown'
+
 /**
  * @abstract Determine a variable's precise type
  * @description Objects are clarified if they're a common type (array, element, null, etc)
@@ -9,7 +52,7 @@ function isDomNode(thing: unknown): thing is Node {
  * @param    deep   Whether to dive deeper into some types to return a more specific type
  * @return          Lowercase name for the variable's type
  */
-function kind(thing: unknown = undefined, deep = false): string {
+function kind(thing: unknown = undefined, deep = false): KnownType {
     /////////////////////////////
     // Basic, non-object types //
     /////////////////////////////
@@ -20,7 +63,7 @@ function kind(thing: unknown = undefined, deep = false): string {
     }
 
     // Standard types except string and number
-    if (['function', 'undefined', 'boolean', 'symbol'].includes(typeof thing)) {
+    if ((['function', 'undefined', 'boolean', 'symbol', 'bigint'] as Array<KnownType>).includes(typeof thing)) {
         return typeof thing
     }
 
@@ -79,7 +122,7 @@ function kind(thing: unknown = undefined, deep = false): string {
 
         while (i--) {
             if (objectType === `[object ${specialTypes[i]}]`) {
-                return specialTypes[i].toLowerCase()
+                return specialTypes[i].toLowerCase() as KnownType
             }
         }
 
@@ -89,7 +132,7 @@ function kind(thing: unknown = undefined, deep = false): string {
                 const result = /\[object\s(\w+Event)\]/.exec(objectType)
 
                 if (result && result[1]) {
-                    return result[1].toLowerCase()
+                    return result[1].toLowerCase() as KnownType
                 }
             }
 
@@ -133,7 +176,7 @@ function kind(thing: unknown = undefined, deep = false): string {
                     thing.nodeType.toString() in nodeTypes &&
                     Object.keys(nodeTypes).map(Number).includes(thing.nodeType)
                 ) {
-                    return nodeTypes[thing.nodeType]
+                    return nodeTypes[thing.nodeType] as KnownType
                 }
 
                 return 'node'
@@ -142,7 +185,7 @@ function kind(thing: unknown = undefined, deep = false): string {
             // DOM Level 1
             if ('nodeType' in thing && typeof thing.nodeType === 'number' && typeof thing.nodeName === 'string') {
                 if (deep && thing.nodeType.toString() in nodeTypes) {
-                    return nodeTypes[thing.nodeType]
+                    return nodeTypes[thing.nodeType] as KnownType
                 }
 
                 return 'node'
@@ -188,3 +231,7 @@ function kind(thing: unknown = undefined, deep = false): string {
 }
 
 export default kind
+
+export function identify<T>(thing: unknown, expectedType: KnownType): thing is T {
+    return kind(thing, true) === expectedType
+}
