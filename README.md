@@ -1,6 +1,6 @@
-# Kind
+# Kind.js
 
-**A more precise version of JavaScript's `typeof`**
+**A precise typechecker for JavaScript**
 
 [![npm package][npm-img]][npm-url]
 [![Build Status][build-img]][build-url]
@@ -110,6 +110,7 @@ A complete list is noted below
 
 - Works with any type, not just objects
 - Always returns a simple lowercase string, just like the native `typeof`
+- TypeScript support
 - Handles undefined or undeclared variables
 - Optimized to check for the most common types first
 - Excellent browser support, including many very old browsers
