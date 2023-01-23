@@ -2,7 +2,7 @@ function isDomNode(thing: unknown): thing is Node {
     return Boolean(thing) && thing instanceof Node && 'nodeName' in thing
 }
 
-type KnownType =
+export type KnownType =
     | 'null'
     | 'function'
     | 'undefined'
@@ -231,7 +231,3 @@ function kind(thing: unknown = undefined, deep = false): KnownType {
 }
 
 export default kind
-
-export function identify<T>(thing: unknown, expectedType: KnownType): thing is T {
-    return kind(thing, true) === expectedType
-}
