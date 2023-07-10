@@ -164,7 +164,13 @@ function kind(thing: unknown = undefined, deep = false): string {
             if ('0' in thing && typeof thing[0] === 'object') {
                 const firstElement = thing[0]
 
-                if (firstElement && 'nodeType' in firstElement && firstElement.nodeType && firstElement.nodeType > 0) {
+                if (
+                    firstElement &&
+                    'nodeType' in firstElement &&
+                    firstElement.nodeType &&
+                    typeof firstElement.nodeType === 'number' &&
+                    firstElement.nodeType > 0
+                ) {
                     return 'nodelist'
                 }
             }
