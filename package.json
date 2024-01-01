@@ -27,7 +27,7 @@
         "url": "https://github.com/patik"
     },
     "engines": {
-        "node": ">=14.0"
+        "node": ">=18.0"
     },
     "keywords": [
         "typeof",
